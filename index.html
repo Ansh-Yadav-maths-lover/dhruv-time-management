@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to do a Million Things All At Once By Ansh Books</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="description" content="How to do a Million Things All At Once By Ansh Books For Absolutely Free...">
+    <meta property="og:image" content="https://i.ibb.co/X5WyYyJ/Untitled-design-1.gif">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/X5WyYyJ/Untitled-design-1.gif">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px; /* Adjusted padding */
+            transition: transform 0.3s ease;
+        }
+
+        .header.hidden {
+            transform: translateY(-100%);
+        }
+
+        .header a img {
+            width: 47px;
+            height: 47px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 45px;
+        }
+
+        .container {
+            max-width: calc(100% - 40px); /* Adjusted width for smaller screens */
+            margin: 80px auto 50px; /* Adjusted margin for smaller screens */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            flex: 1;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        p {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+
+        .chapter {
+            margin: 20px 0;
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        .chapter-title {
+            cursor: pointer;
+            padding: 15px;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .chapter-title:hover {
+            background-color: #bdc3c7;
+        }
+
+        .content {
+            display: none;
+            padding: 15px;
+            background-color: #f0f2f5;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .content a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .icon {
+            transition: transform 0.3s ease;
+        }
+
+        .open .icon {
+            transform: rotate(180deg);
+        }
+
+        /* Responsive Styling */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .chapter-title {
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .header {
+                padding: 10px 20px; /* Adjusted padding */
+            }
+        }
+
+        .footer {
+            background-color: #eae8e6;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+            border-top: 1px solid #bdc3c7;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        /* Adjustments for smaller screens */
+        @media only screen and (max-width: 600px) {
+            .footer {
+                font-size: 12px;
+                padding: 5px 0;
+            }
+        }
+
+                /* Pop-up Styling */
+                .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s;
+        }
+
+        .popup-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 80%;
+            position: relative;
+        }
+
+        .popup-content img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .popup-close:hover {
+            background-color: #c0392b;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('.header');
+            let lastScrollY = window.scrollY;
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > lastScrollY) {
+                    // Scrolling down
+                    header.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    header.classList.remove('hidden');
+                }
+                lastScrollY = window.scrollY;
+            });
+
+            const chapterTitles = document.querySelectorAll('.chapter-title');
+
+            chapterTitles.forEach(title => {
+                title.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('.icon');
+                    const allContents = document.querySelectorAll('.content');
+                    const allIcons = document.querySelectorAll('.icon');
+
+                    allContents.forEach(c => {
+                        if (c !== content) c.style.display = 'none';
+                    });
+
+                    allIcons.forEach(i => {
+                        if (i !== icon) i.classList.remove('open');
+                    });
+
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                        icon.classList.remove('open');
+                    } else {
+                        content.style.display = 'block';
+                        icon.classList.add('open');
+                    }
+                });
+            });
+        
+
+        // Pop-up logic
+        const popupOverlay = document.querySelector('.popup-overlay');
+            const popupClose = document.querySelector('.popup-close');
+
+            function showPopup() {
+                popupOverlay.classList.add('active');
+            }
+
+            function hidePopup() {
+                popupOverlay.classList.remove('active');
+            }
+
+            popupClose.addEventListener('click', hidePopup);
+
+            // Show the pop-up on first load
+            showPopup();
+        });
+    </script>
+</head>
+<body>
+    <div class="header">
+        <a href="#">
+            <img src="https://i.ibb.co/X5WyYyJ/Untitled-design-1.gif" alt="Ansh Books Logo">
+        </a>
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+            <span style="font-size: 12px;"><p >Ansh Books🔥
+<br>In Association with Study Ratna ❤️</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <img src="https://raw.githubusercontent.com/Ansh-Yadav-maths-lover/img-host/main/Untitled%20design%20(7).png" alt="Ansh Books Logo" class="logo">
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Welcome to the Course How to do a Million Things All At Once</h1>
+        <center>
+            <a href="//academy.dhruvrathee.com/" target="_blank">
+                <h4>Credit : Dhruv Rathee</h4>
+            </a>
+        </center>
+
+        <p>Become a Master of Time Management and Productivity. Learn from me as I teach you how to plan your day, track your time, achieve your goals and live your dream life!</p>
+
+
+
+        <div class="chapter">
+            <div class="chapter-title">
+                <span>WELCOME</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div> 
+            <div class="content">
+                <p>Welcome To The Course !</p>
+                <p><a href="Welcome\Introduction.html"> ● Introduction</a></p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-title">
+                <span>MODULE 1</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="content">
+                <p>Goal Setting and Work-Life Balance</p>
+                <p><a href="Module-1\Introduction.html"> ● Introduction</a></p>
+                <!---<p><a href="404.html"> ● What Makes You Happy?</a></p>--->
+                <p><a href="Module-1\Balancing-Your-Life.html"> ● Balancing Your Life</a></p>
+                <p><a href="Module-1\Ideal-Life.html"> ● Ideal Life</a></p>
+                <p><a href="Module-1\Goal-Creation.html"> ● Goal Creation</a></p>
+                <p><a href="Module-1\Homework.html"> ● Homework</a></p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-title">
+                <span>MODULE 2</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="content">
+                <p>Time Management</p>
+                <p>Goal Setting and Work-Life Balance</p>
+                <p><a href="Module-2\Introduction.html"> ● Introduction</a></p>
+                <p><a href="Module-2\Tracking-Your-Time.html"> ● Tracking Your Time</a></p>
+                <p><a href="Module-2\Saving-Time.html"> ● Saving Time</a></p>
+                <p><a href="Module-2\Using-Time-Wisely.html"> ● Using Time Wisely</a></p>
+                <p><a href="Module-2\Homework.html"> ● Homework</a></p>         
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-title">
+                <span>MODULE 3</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="content">
+                <p>How to Increase Your Productivity</p>
+                <p><a href="Module-3\Introduction.html"> ● Introduction</a></p>
+                <p><a href="Module-3\Productivity.html"> ● Productivity</a></p>
+                <p><a href="Module-3\Creating-Deadlines.html"> ● Creating Deadlines</a></p>
+                <!---<p><a href="404.html"> ● To-Do Lists</a></p>--->
+                <p><a href="Module-3\Rule-of-The-One.html"> ● Rule of The One</a></p>
+                <p><a href="Module-3\Plan-Your-Balance.html"> ● Plan Your Balance</a></p>
+                <p><a href="Module-3\The-Importance-Of-Environment.html"> ● Importance of Environment</a></p>
+                <p><a href="Module-3\Homework.html"> ● Homework</a></p>          
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-title">
+                <span>MODULE 4</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="content">
+                <p>How to Beat Procrastination</p>
+                <p><a href="Module-4\Introduction.html"> ● Introduction</a></p>
+                <p><a href="Module-4\Social-Media-Monster.html"> ● Social Media Monster</a></p>
+                <p><a href="Module-4\Throw-Away-Your-TV.html"> ● Throw Away Your TV</a></p>
+                <p><a href="Module-4\Your-Attention-Currency.html"> ● Your Attention Currency</a></p>
+                <p><a href="Module-4\Where-to-Start.html"> ● Where To Start</a></p>
+                <p><a href="Module-4\Learn-To-be-Bored.html"> ● Learn to be Bored</a></p>
+                <p><a href="Module-4\Live-Intentionally.html"> ● Live Intentionally</a></p>
+                <p><a href="Module-4\Homework.html"> ● Homework</a></p>
+            </div>
+        </div>
+        <div class="chapter">
+            <div class="chapter-title">
+                <span>MODULE 5</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="content">
+                <p>Bonus Q&A</p>
+                <p><a href="Module-5\Bonus-Interview-Pt-1.html"> ● Bonus Interview Part-1</a></p>
+                <p><a href="Module-5\Bonus-Interview-Pt-2.html"> ● Bonus Interview Part-2</a></p>
+            </div>
+        </div>    
+        
+        <div class="popup-overlay">
+            <div class="popup-content">
+                <button class="popup-close">&times;</button>
+                <img src="https://i.ibb.co/72h8f64/Say.gif" alt="Popup Image">
+            </div>
+        </div>
+
+ <!---       <div class="chapter">
+            <div class="chapter-title">
+                <span>MODULE 6</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="content">
+                <p>By Ansh Books</p>
+                <p><a href="Module-6\"> ● Developing an Editor's Eye</a></p>
+            </div>
+        </div>
+        <div class="chapter">
+            <div class="chapter-title">
+                <span>MODULE 7</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="content">
+                <p>By Ansh Books</p>
+                <p><a href="Module-7\"> ● Monetization 101</a></p>
+            </div>
+        </div>          <div class="chapter">
+            <div class="chapter-title">
+                <span>MODULE 8</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="content">
+                <p>By Ansh Books</p>
+                <p><a href="Module-8\"> ● Community Building</a></p>
+            </div>
+        </div>  --->
+        <div class="chapter">
+        <div class="chapter-title">
+            <span>PDF RESOURCE</span>
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>
+        </div>
+        <div class="content">
+               <p>List Of Attached Documents In The Modules </p>
+             <p><a href="https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/?url=https://dhruv-time-management-by-ansh.vercel.app/pdf/Ideal-Day-vs-Actual-Day-Worksheet.pdf"> ● Ideal Day Vs Actual Day Worksheet</a></p>
+                <p><a href="https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/?url=https://dhruv-time-management-by-ansh.vercel.app/pdf/Module-1-Assignment.pdf"> ● Module 1 Assignment</a></p>
+                <p><a href="https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/?url=https://dhruv-time-management-by-ansh.vercel.app/pdf/Productivity-Plan.pdf"> ● Productivity Plan</a></p>
+                <p><a href="https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/?url=https://dhruv-time-management-by-ansh.vercel.app/pdf/Tracking-Your-Time.pdf"> ● Trackiing Your Time</a></p>
+                <p><a href="https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/?url=https://dhruv-time-management-by-ansh.vercel.app/pdf/Your-To-Do-List.pdf"> ● Your To Do List</a></p>
+                <!---<p><a href="https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/?url=https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/zOJCFIUkkhf.pdf"> ● Course Video 18th</a></p>
+                <p><a href="https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/?url=https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/96c2FhykUm.pdf"> ● Course Video 19th</a></p>
+                <p><a href="https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/?url=https://dhruv-chat-gpt-by-ansh.vercel.app/pdf/3gwZthDpnx.pdf"> ● Course Video 20th</a></p>
+                <p><a href="chapter1.html"> ● Jobs and Interview Preparation</a></p>--->
+         </div>
+        
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Ansh Books</p>
+    </div>
+</body>
+</html>

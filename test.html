@@ -1,0 +1,159 @@
+<!---Ansh Great--->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="icon" type="image/jpeg" href="https://ansh-yadav-maths-lover.github.io/img-host/opopopo.png">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css" />
+    <link href="https://ansh-yadav-maths-lover.github.io/img-host/opopopo.png" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Poppins|Quattrocento+Sans" rel="stylesheet"/>
+    <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js"></script>
+  
+
+
+    <title>By Ansh Books </title>
+    <link rel="stylesheet" href="https://ansh-yadav-maths-lover.github.io/anonymous-ansh/styles.css">
+    <link rel="stylesheet" href="https://ansh-yadav-maths-lover.github.io/dhruv-chat-gpt/css/main.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>MODULE 8</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="https://about-ansh.vercel.app/">About</a></li>
+                </ul>
+            </nav> 
+        </div>
+    </header>
+<section>
+  
+ <div id="loading" class="loading">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+  
+<video poster="https://cdn.fs.teachablecdn.com/vZshYXCgR2SM0cqN2S8Y">
+        <source src="https://fast.wistia.com/embed/medias/ffx7lvetup.m3u8" type="application/x-mpegURL">
+        Your browser does not support the video tag.
+    </video>
+
+    
+</section>
+<div class="program-info">
+  <img class="logo" src="https://i.ibb.co/9TkD6sD/Screenshot-2024-06-26-130407.png" alt="Course Oredit Owner Logo">
+  <span class="s-n">Abhi and Niyu</span>
+  <span class="channel-name">Community Building
+
+<br><span class="live-text" style="color:brown"></span></span>
+    </div>
+   <p>If any Problem persists then refresh the page.🙂</p>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Ansh Books. All rights reserved.</p>
+         
+        </div>
+    </footer>
+    <div id="telegram-popup" class="telegram-popup">
+      <img class="telegram-logo" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
+      <p>Join our Telegram channel for the latest updates: <a href="//t.me/+_9V5CRBJoqcxZTRl" target="_blank">Ansh Books Telegram</a></p>
+      <button id="close-popup">&times;</button>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const video = document.querySelector("video");
+    const src = video.getElementsByTagName("source")[0].src;
+    const options = {};
+
+    if (Hls.isSupported()) {
+        const hlsConfig = {
+            maxMaxBufferLength: 100,
+        };
+        const hls = new Hls(hlsConfig);
+        hls.loadSource(src);
+        hls.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
+            const levels = hls.levels.map(level => level.height);
+            options.quality = {
+                default: levels[0],
+                options: levels,
+                forced: true,
+                onChange: (selected) => {
+                    hls.levels.forEach((level, i) => {
+                        if (level.height === selected) {
+                            hls.currentLevel = i;
+                        }
+                    });
+                },
+            };
+            options.previewThumbnails = {
+                enabled: false,
+                src: '#'
+            };
+            options.tooltips = {
+                controls: true,
+                seek: true
+            };
+            options.speed = {
+                selected: 1,
+                options: [1, 1.25, 1.5, 2, 2.25, 2.5, 3, 3.5, 4],
+            };
+            options.listeners = {
+                seeking: function(event) {
+                    const currentTime = video.currentTime;
+                    const seekTime = 10;
+                    if (event.detail.interaction == "doubletap") {
+                        video.currentTime = Math.min(currentTime + seekTime, video.duration);
+                    }
+                },
+                pause: function(event) {
+                    if (event.detail.interaction == "tap" && !video.paused) {
+                        video.pause();
+                    }
+                }
+            };
+            const bodyElement = document.querySelector("body");
+            const loadingElement = document.getElementById("loading");
+            loadingElement.style.display = "none";
+            bodyElement.style.visibility = "visible";
+            new Plyr(video, options);
+        });
+        hls.attachMedia(video);
+        window.hls = hls;
+    } else {
+        options.speed = {
+            selected: 1,
+            options: [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+        };
+        const bodyElement = document.querySelector("body");
+        const loadingElement = document.getElementById("loading");
+        loadingElement.style.display = "none";
+        bodyElement.style.visibility = "visible";
+        new Plyr(video, options);
+    }
+
+    // Telegram popup script
+    const popup = document.getElementById("telegram-popup");
+    const closeButton = document.getElementById("close-popup");
+
+    // Show the popup after a delay (e.g., 3 seconds)
+    setTimeout(() => {
+        popup.classList.add("show");
+    }, 3000);
+
+    // Close the popup when the close button is clicked
+    closeButton.addEventListener("click", () => {
+        popup.classList.remove("show");
+    });
+});
+
+  </script>
+</body>
+</html>

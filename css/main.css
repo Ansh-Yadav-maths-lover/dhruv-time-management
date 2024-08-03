@@ -1,0 +1,119 @@
+        html {
+          font-family: Poppins;
+          background: #000;
+          margin: 0;
+          padding: 0;
+        }
+
+        .plyr {
+          height: 100%;
+          width: 100%;
+        }
+
+        .loading {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #000;
+          z-index: 9999;
+        }
+
+        .loading {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+
+        .circle {
+          width: 20px;
+          height: 20px;
+          margin: 10px;
+          border-radius: 50%;
+          animation: loader-animation 0.75s ease infinite;
+        }
+
+        .circle:nth-child(1) {
+          background-color: #D90429;
+          animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+          background-color: #FFA300;
+          animation-delay: 0.15s;
+        }
+
+        .circle:nth-child(3) {
+          background-color: #048BA8;
+          animation-delay: 0.3s;
+        }
+
+        @keyframes loader-animation {
+          0% {
+            transform: scale(0);
+            opacity: 0.7;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 0;
+          }
+        }
+
+        .telegram-popup {
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding: 15px 25px;
+          display: flex;
+          align-items: center;
+          font-family: 'Poppins', sans-serif;
+          font-size: 14px; /* Adjusted font size */
+          color: #333;
+          z-index: 10000;
+          visibility: hidden;
+          opacity: 0;
+          transition: visibility 0s, opacity 0.5s ease-in-out;
+          width: 90%; /* Adjusted width */
+          max-width: 500px; /* Ensuring it doesn't get too wide on larger screens */
+        }
+
+        .telegram-popup p {
+          margin: 0;
+          padding-left: 10px; /* Adding space between logo and text */
+        }
+
+        .telegram-popup a {
+          color: #007bff;
+          text-decoration: none;
+        }
+
+        .telegram-popup a:hover {
+          text-decoration: underline;
+        }
+
+        .telegram-popup button {
+          background: none;
+          border: none;
+          font-size: 18px;
+          cursor: pointer;
+          color: #666;
+          margin-left: 10px; /* Adding space between text and close button */
+        }
+
+        .telegram-popup.show {
+          visibility: visible;
+          opacity: 1;
+        }
+
+        .telegram-popup .telegram-logo {
+          width: 24px;
+          height: 24px;
+          flex-shrink: 0; /* Ensures logo doesn't shrink */
+        }

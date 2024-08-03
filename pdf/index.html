@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Preview</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 0;
+        }
+        header img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+        iframe {
+            width: 80%;
+            height: 70%; /* Adjusted height */
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px; /* Adjusted margin */
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            text-align: center;
+            width: 100%;
+            color: #666;
+            font-size: 14px;
+        }
+        .refresh-btn-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+        .refresh-btn {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .refresh-btn:hover {
+            background-color: #2980b9;
+        }
+                .telegram-popup p {
+          margin: 0;
+          padding-left: 10px; /* Adding space between logo and text */
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://ansh-yadav-maths-lover.github.io/about/images/pfp2.jpg" alt="Logo">
+        <h1>Ansh Books</h1>
+    </header>
+    <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+    <div class="refresh-btn-container">
+        <button class="refresh-btn" onclick="refreshPDF()">Refresh PDF</button>
+    </div>
+
+    <script src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"></script>
+    <script>
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var pdfUrl = urlParams.get('url');
+            if (pdfUrl) {
+                document.getElementById('pdf-viewer').src = "https://docs.google.com/viewer?url=" + pdfUrl + "&embedded=true";
+            }
+        };
+
+        function refreshPDF() {
+            var iframe = document.getElementById('pdf-viewer');
+            iframe.src = iframe.src;
+        }
+
+    </script>
+</body>
+</html>
